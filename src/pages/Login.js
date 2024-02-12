@@ -1,4 +1,5 @@
 import { Button, TextField } from "@mui/material";
+import {Link} from 'react-router-dom';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 export default function Login() {
   return (
@@ -9,7 +10,7 @@ export default function Login() {
             <TextField color="secondary" required id="filled-email-input" label="Email" />
             <TextField color="secondary" required id="filled-password-input" label="Password"
             type="password" autoComplete="current-password" />
-            <Button variant="contained">Sign In</Button>
+            <Button variant="contained" color="secondary" component={Link} to='/blog'>Sign In</Button>
       </div>
     </div>
   );
