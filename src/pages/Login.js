@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import { LogIn } from '../api-services/AuthService';
 import { useState } from "react";
 import { setUser } from '../api-services/UserService';
@@ -8,23 +7,29 @@ import { setUser } from '../api-services/UserService';
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   
-  const handleLogin = async (username, password) => {
+  const handleLogin = async () => {
     try {
       // Call the LogIn function with the username and password
       const { accessToken, refreshToken } = await LogIn({ username, password });
   
       // Handle successful login (store tokens, redirect, etc.)
-      console.log('Login successful!');
-      console.log('Access Token:', accessToken);
-      console.log('Refresh Token:', refreshToken);
-      navigate('/blog')
-      // Redirect to another page, update state, etc.
+      if (accessToken) {
+        setUser(accessToken);
+        localStorage.setItem('blog-app-jwt', JSON.stringify(accessToken));
+        navigate('/blog');
+        console.log('Login successful!');
+      } else {
+        // Handle case where accessToken is not received
+        setError("Login failed. Please check your credentials.");
+      }
     } catch (error) {
       // Handle login error
       console.error('Error logging in:', error.message);
       // Display error message to the user or perform other actions
+      setError("Login failed."+error.message);
     }
   };
 
@@ -32,7 +37,6 @@ export default function Login() {
     <div className="Login">   
       <div className="Login-container">
         <h1>Login Page for Module 4 Final</h1>
-        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
         <TextField
           color="secondary"
           required
@@ -52,10 +56,13 @@ export default function Login() {
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => handleLogin(username,password)}
+          onClick={handleLogin}
         >
           Sign In
         </Button>
+        
+        {error && <h4>{error}</h4>}{/*Displays error if error is set*/}
+        <a href="/register">Need to register? Click here.</a>
       </div>
     </div>
   );

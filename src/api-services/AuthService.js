@@ -49,5 +49,6 @@ export const LogIn = async (payload) => {
     // Handle network errors or other exceptions
     console.error('Error logging in within AuthServices:', error);
     throw error;
+    
   }
 };

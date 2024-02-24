@@ -19,11 +19,12 @@ export const setUser = (token) => {
 }
 
 export const getUser = () => {
-  const user = localStorage.getItem(userKey);
-  console.log('getUser', user);
-  if (user) {
-    return JSON.parse(user);
+  const userString = localStorage.getItem('blog-app-jwt');
+  console.log('getUser', userString);
+  
+  if (userString) {
+    return JSON.parse(userString);
   } else {
-    return {  }
+    return {};
   }
 }
