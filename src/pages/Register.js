@@ -1,7 +1,6 @@
 import { register } from "../api-services/AuthService";
 import { useState } from "react";
 import { Button, TextField } from "@mui/material";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
@@ -25,7 +24,6 @@ export default function Register() {
     <div className="Login">   
       <div className="Login-container">
         <h1>Register Page for Module 4 Final</h1>
-        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
         <TextField
           color="secondary"
           required

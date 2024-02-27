@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { Link } from 'react-router-dom';
 import { getUser } from "../api-services/UserService";
-
+import { removeJwt } from "../api-services/JwtService";
 export default function Blog() {
   // Call the getUser function to retrieve user information
   const user = getUser();
@@ -11,7 +11,7 @@ export default function Blog() {
 
   return (
     <div className="Blog">
-      <Button variant="contained" color="secondary" component={Link} to='/'>Logout</Button>
+      <Button variant="contained" color="secondary" component={Link} to='/' onClick={removeJwt}>Logout</Button>
       <h4>{username}</h4> {/* Display username or 'Guest' if no user */}
       <h1> Blog Post </h1>
       <div className="Blog-container">

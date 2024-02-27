@@ -23,7 +23,7 @@ export const getUser = () => {
   console.log('getUser', userString);
   
   if (userString) {
-    return JSON.parse(userString);
+    return userString;
   } else {
     return {};
   }

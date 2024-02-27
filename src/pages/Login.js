@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { LogIn } from '../api-services/AuthService';
 import { useState } from "react";
 import { setUser } from '../api-services/UserService';
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       // Call the LogIn function with the username and password
-      const { accessToken, refreshToken } = await LogIn({ username, password });
+      const { accessToken } = await LogIn({ username, password });
   
       // Handle successful login (store tokens, redirect, etc.)
       if (accessToken) {
@@ -37,11 +38,12 @@ export default function Login() {
     <div className="Login">   
       <div className="Login-container">
         <h1>Login Page for Module 4 Final</h1>
+        <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
         <TextField
           color="secondary"
           required
           id="filled-email-input"
-          label="Email" 
+          label="Username" 
           onChange={(e) => setUsername(e.target.value)}
         />
         <TextField
